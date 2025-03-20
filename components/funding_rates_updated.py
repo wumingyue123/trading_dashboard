@@ -127,24 +127,13 @@ def get_cached_funding_payments(exchange: str, days: int):
     
     return client.calculate_funding_payments(exchange, days)
 
-def display_funding_rates():
-    """Display funding rates and related information."""
+def display_funding_rates(days: int):
+    """Display funding rates and related information.
     
+    Args:
+        days (int): Number of days to analyze
+    """
     st.subheader("📊 Funding Rate Dashboard")
-    
-    # Add time period selector
-    days = st.selectbox(
-        "Select Time Period",
-        options=[
-            (1, "1 day"),
-            (7, "7 days"),
-            (14, "14 days"),
-            (30, "30 days")
-        ],
-        index=1,  # Default to 7 days
-        help="Select the number of days to calculate funding payments for",
-        format_func=lambda x: x[1]  # Display the formatted string
-    )[0]  # Get the actual number value
     
     # Initialize variables
     all_positions = []
@@ -156,7 +145,7 @@ def display_funding_rates():
     historical_positions = {}
     historical_funding_payments = {}
     funding_intervals = {}  # Store funding intervals by exchange and symbol
-    all_funding_rates = []  # Store all funding rates for charts
+    all_funding_rates = []
     
     # First, get all positions and funding data
     for exchange in ['bybit', 'binance', 'okx', 'hyperliquid', 'rabbitx']:
@@ -410,33 +399,6 @@ def display_funding_rates():
                 except Exception as e:
                     print(f"Error creating chart for {exchange}: {str(e)}")
                     st.error(f"Error creating funding rate chart for {exchange}: {str(e)}")
-
-    # Display metrics tables
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown("#### 🔝 Top Positions by Size")
-        top_size_df = pd.DataFrame([{
-            'Token': t['symbol'],
-            'Exchange': t['exchange'].capitalize(),
-            'Side': t['side'],
-            'Size': f"${t['notional_size']:,.0f}",
-            'Interval': t['funding_interval'],
-            'Status': t['status']
-        } for t in sorted(token_metrics, key=lambda x: abs(x['notional_size']), reverse=True)[:5]])
-        st.dataframe(top_size_df, hide_index=True, use_container_width=True)
-    
-    with col2:
-        st.markdown("#### 💰 Top Funding Earners (8h Normalized)")
-        top_funding_df = pd.DataFrame([{
-            'Token': t['symbol'],
-            'Exchange': t['exchange'].capitalize(),
-            'Raw PnL': f"${t['raw_funding_pnl']:,.2f}",
-            'Norm. PnL (8h)': f"${t['normalized_funding_pnl']:,.2f}",
-            'APY': f"{t['funding_apy']:,.2f}%",
-            'Interval': t['funding_interval'],
-            'Status': t['status']
-        } for t in sorted(token_metrics, key=lambda x: x['normalized_funding_pnl'], reverse=True)[:5]])
-        st.dataframe(top_funding_df, hide_index=True, use_container_width=True)
 
     # Clear memory
     del historical_positions

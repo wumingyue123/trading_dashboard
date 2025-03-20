@@ -24,6 +24,7 @@ import asyncio
 from urllib.parse import urlencode
 import uuid
 import logging
+from .fee_tracker import FeeTracker
 
 class BybitResponse(TypedDict):
     result: Dict[str, Dict[str, List[Dict[str, Any]]]]
@@ -51,6 +52,7 @@ class ExchangeClient:
         self._loop = None
         self.db_manager = DatabaseManager()
         self.data_processor = DataProcessor()
+        self.fee_tracker = FeeTracker(self)
         self._clients_initialized = {
             'binance': False,
             'bybit': False,
