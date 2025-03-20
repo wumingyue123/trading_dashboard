@@ -1,0 +1,14 @@
+[theme]
+primaryColor = "#0078FF"  # Vibrant blue for primary actions
+backgroundColor = "#0E1117"  # Dark background
+secondaryBackgroundColor = "#1E2430"  # Slightly lighter for cards/containers
+textColor = "#FFFFFF"  # White text
+font = "sans serif"  # Clean, modern font
+
+[server]
+headless = true
+enableCORS = true
+enableXsrfProtection = true
+
+[browser]
+gatherUsageStats = false  # Disable usage stats collection 

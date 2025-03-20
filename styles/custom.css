@@ -1,0 +1,145 @@
+/* Custom CSS for styling overrides */
+:root {
+    --primary-color: #0078FF;
+    --success-color: #05C270;
+    --warning-color: #FFAB2D;
+    --danger-color: #FF5C5C;
+    --dark-bg: #0E1117;
+    --card-bg: #1E2430;
+    --border-color: #2D3748;
+    --hover-color: #2C3E50;
+}
+
+/* Text colors */
+.profit {
+    color: var(--success-color) !important;
+    font-weight: 600;
+}
+
+.loss {
+    color: var(--danger-color) !important;
+    font-weight: 600;
+}
+
+/* Card styling */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+}
+
+/* Table styling */
+.table-container {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.stDataFrame {
+    background-color: var(--card-bg) !important;
+}
+
+/* Custom metric styling */
+.metric-container {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease;
+}
+
+.metric-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Badge styles */
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.badge-success {
+    background-color: rgba(5, 194, 112, 0.2);
+    color: var(--success-color);
+    border: 1px solid var(--success-color);
+}
+
+.badge-danger {
+    background-color: rgba(255, 92, 92, 0.2);
+    color: var(--danger-color);
+    border: 1px solid var(--danger-color);
+}
+
+.badge-warning {
+    background-color: rgba(255, 171, 45, 0.2);
+    color: var(--warning-color);
+    border: 1px solid var(--warning-color);
+}
+
+/* Button styling */
+.stButton button {
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+}
+
+.stButton button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Sidebar styling */
+.sidebar .sidebar-content {
+    background-color: var(--card-bg);
+}
+
+/* Header styling */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700 !important;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+/* Fix for multiselect dropdown */
+.stMultiSelect div div div div div,
+.stMultiSelect div div div div,
+.stMultiSelect div div div {
+    font-size: 0.85rem !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease;
+}
+
+/* Hide development-mode hamburger menu and footer */
+.stApp header {
+    visibility: hidden;
+}
+
+footer {
+    visibility: hidden;
+}
+
+/* Adjustments for mobile responsiveness */
+@media (max-width: 768px) {
+    .card, .table-container, .metric-container {
+        padding: 12px;
+    }
+}
